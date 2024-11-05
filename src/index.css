@@ -45,3 +45,15 @@ a {
   background: #212ea0;
   color: #fff;
 }
+
+/* Media Query */
+
+@media (max-width: 1200px) {
+  .container {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  .btn {
+    padding: 12px 22px;
+  }
+}
