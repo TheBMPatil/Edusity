@@ -6,6 +6,33 @@ import phone_icon from '../../assets/phone-icon.png'
 import location_icon from '../../assets/location-icon.png'
 import white_arrow from '../../assets/white-arrow.png'
 const Contact = () => {
+    const [result, setResult] = React.useState("");
+
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        setResult("Sending....");
+        const formData = new FormData(event.target);
+
+        // formData.append("access_key", "d381cc64-c9cb-4914-9fc6-91317ea40bfd");
+        // formData.append("access_key", process.env.REACT_APP_ACCESS_KEY);
+        formData.append("access_key", import.meta.env.VITE_ACCESS_KEY);
+
+
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            setResult("Form Submitted Successfully");
+            event.target.reset();
+        } else {
+            console.log("Error", data);
+            setResult(data.message);
+        }
+    };
     return (
         <div className='contact'>
 
@@ -24,7 +51,7 @@ const Contact = () => {
             {/* Form */}
             <div className="contact-col">
 
-                <form action="">
+                <form onSubmit={onSubmit}>
                     <label >Your Name</label>
                     <input type="text" name='name' placeholder='Enter your name' required />
                     <label >Phone Number</label>
@@ -34,7 +61,7 @@ const Contact = () => {
                     <button type='submit' className='btn dark-btn'>Submit now <img src={white_arrow} alt="" /> </button>
                 </form>
 
-                <span></span>
+                <span>{result}</span>
             </div>
 
         </div>
