@@ -1,4 +1,6 @@
-# React + Vite
+# Edusity By Bhagvat Mutthe
+[Live preview :](https://edusity-bm-0787.netlify.app/)
+
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
